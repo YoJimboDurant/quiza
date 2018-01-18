@@ -1,0 +1,41 @@
+---
+title: "Economics Quiz"
+output:
+  word_document:
+    reference_docx: mystyles.docx
+---
+
+# Quiz
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(as.numeric(Sys.time()))
+```
+```{r readdata, echo=FALSE, warning=FALSE, message=FALSE}
+library(readxl)
+library(dplyr)
+
+quizes <- read_excel("quizes.xlsx")
+
+len <- length(quizes$Week[quizes$Week == max(quizes$Week)])
+
+quiztbl <- bind_rows((filter(quizes, Week == max(Week)) %>%
+                        sample_n(size = len)),
+(filter(quizes, Week < max(Week)) %>% 
+          sample_n(size = 5))) %>%
+  sample_n(size=len+5)
+
+Answers <- quiztbl$Term
+
+quiztbl$Term <-"\n\n___________________________"
+
+knitr::kable(quiztbl)
+```
+
+##### Answers
+
+#### Answers
+
+````{r, echo=FALSE}
+knitr::kable(data.frame(Answers = Answers))
+```
