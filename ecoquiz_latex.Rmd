@@ -17,7 +17,7 @@ library(readxl)
 library(dplyr)
 library(kableExtra)
 
-quizes <- read_excel("quizes.xlsx")
+quizes <- read_excel("quizes2.xlsx")
 
 len <- length(quizes$Week[quizes$Week == max(quizes$Week)])
 
